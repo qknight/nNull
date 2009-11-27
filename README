@@ -1,36 +1,9 @@
-one point why linux suckz is the fact that network managing is so damn command line based. there are
-no gui frontends which i consider worth using. for instance 'networkmanager' has a good basic design
-but fails when something does not work as expected. there is really no good way to debug the network
-using networkmanager. here i put some ideas together how to make things better. in general i love
-the dbus design networkmanager.
+one point why linux suckz is the fact that network managing is 'command line' based. there are
+no gui frontends which i consider worth using. 
+for instance 'networkmanager' has a good basic design but fails when something does not work as expected. th
+ere is really no good way to debug the network using networkmanager. 
 
-== server & client functions ==
-server:
- > void debugLine(class debugOutput)
- > signal (program exit) of the server, maybe this is done by dbus itself
- > status_change of the network stack (l2/l3 ip ... carrier...)
-
- < means incomming
- > means outgoing
-
-== problems ==
-- what happens if i start two clients or two servers?! check that
-- write logs: every process (even the process which starts all services (read the server)) should be logged
-
-== later ==
-- dhcpcd sets a default route (make this optional)
-- there could be several dhcpd server instances (pick a default, make picking optional)
-
-== dbus rights ==
-3:18 < qknight> i use the 'session' bus right now
-13:18 < qknight> now i want to change to the system bus, does this involve some 'right' issue?
-13:19 < qknight> i mean could i get problem with user rights somewhere?
-13:20 < qknight> i currently hack something like networkmanager and the 'server' needs to be on the systembus
-                 (the server waits for clients to query for available configs, a client can then pick one string
-                 and can connect by connect("string"); where sting is the config name)
-14:21 < thiago> qknight: yes, you need to give yourself the rights you need in /etc/dbus-1/system.d/
-14:44 < qknight> thiago: thanks!
-/etc/dbus-1/system.d/
+here i put some ideas together how to make things better. in general i love the dbus design of networkmanager.
 
 used documentation:
 - qt docu of course
