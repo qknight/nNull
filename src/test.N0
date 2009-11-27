@@ -1,0 +1,4 @@
+#!/bin/bash
+mkdir -p /tmp/n0
+date=`date`
+touch /tmp/n0/"$date"

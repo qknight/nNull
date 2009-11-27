@@ -1,0 +1,29 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+          "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node name="/de/lastlog/nm">
+  <interface name="de.lastlog.nmInterface">
+    <method name="reloadConfigurations">
+      <arg type="i" name="retval" direction="out"/>
+    </method>
+      <method name="listConfigs">
+      <arg type="u" name="count" direction="out"/>
+    </method>
+    <method name="executeConfiguration">
+      <arg type="s" name="config" direction="in"/>
+      <arg type="i" name="retval" direction="out"/>
+    </method>
+    <method name="queryConfigurationName">
+      <arg type="i" name="pos" direction="in"/>
+      <arg type="s" name="configName" direction="out"/>
+    </method>
+    <signal name="debugOutput">
+<!--       <annotation name=d"e.lastlog.nmInterface.QtTypeName.Out0" value="infoStruct"/> -->
+      <arg type="s" name="message" direction="out"/>
+<!--       <arg type="s" name="timestamp" direction="out"/> -->
+<!--       <arg type="s" name="process_name" direction="out"/> -->
+<!--       <arg type="u" name="process_pid" direction="out"/> -->
+<!--       <arg type="u" name="stdLevel" direction="out"/> -->
+    </signal>
+    <signal name="crashed"/>
+  </interface>
+</node>

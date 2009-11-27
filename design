@@ -1,0 +1,29 @@
+this is a list of general ideas (not implemented in nNull yet):
+
+         system daemon --------------------- mvc (via dbus) --------------------- gui backend
+       (what happens in the network)                                            (written in qt)
+             |
+             |- abstraction over wlan
+             |  \- not encrypted and encrypted
+             |- normal network
+             |- vpn
+
+ - enables excessive logging of events (disconnects as in wpa or power levels on wlan)
+ - plugin interface for monitoring plugins as kde 3.x plugins for wlan had already
+ - contains a pyramid of events as:
+    - wlan status -> if connected proceed
+    - if connected -> dhcp or static address
+    - if address set -> done or vpn
+    - if vpn -> connect 
+    ...
+
+
+- openresolv
+- dnsmasq
+- wpa_supplicant (wpa_cli?)
+- ip/iwconfig
+- dhclient
+- dhcpcd
+  http://markmail.org/message/ovnqfpn67fsmpuj4
+  http://www.thekelleys.org.uk/diamond/diamond-0.1.tar.gz 
+

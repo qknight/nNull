@@ -1,0 +1,11 @@
+issue:
+ currently we are logging only the main script which executes other programs whose behaviour is
+ to detache from the console. it would be nice to let these processes log into /root/config/logs/YYYYMMDD-HHMMSS/
+ which is created on the fly before script execution.
+
+ for example wpa_supplicant:
+ /root/config/logs/YYYYMMDD-HHMMSS/wpa_supplicant.stdout
+ /root/config/logs/YYYYMMDD-HHMMSS/wpa_supplicant.stderr
+
+solution:
+ use QFileSystemWatch on /root/config/logs/YYYYMMDD-HHMMSS/wpa_supplicant.stderr on changes

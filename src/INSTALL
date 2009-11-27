@@ -1,0 +1,57 @@
+== author ==
+this software was written by joachim schiele <js@lastlog.de> 26Nov2009
+please see lastlog.de for updates. i will upload this software at github.com at 
+  http://github.com/qknight/nNull
+
+== installation ==
+0. prepare the nNull-server dbus daemon
+  (first let's resolve a dbus::systembus permission problem)
+  cp nNULL.conf /etc/dbus-1/system.d/
+  /etc/init.d/dbus restart
+
+  the nNull-server looks for configs in /root/config/ so
+  mkdir -p /root/config (as root)
+  cp test.N0 /root/config
+  chmod 0755 /root/config/test.N0
+  - you can also adapt test.N0 to your needs and rename it to wpa_default-ath0.N0
+1. nNull-server:
+  cd server
+  qmake
+  make
+  see debug/ for the binary called nNull-server
+  ./nNull-server (should be run as root, not as normal user)
+  you can also start it via init (which i don't do) or you can use /etc/conf.d/local.start (as i do)
+2. client:
+  cd client
+  qmake
+  make
+  see debug/ for the binary called nNull-client
+  ./client (should be run as normal user not as root)
+
+in case the client can't access the nNull-server daemon, use qdbusviewer to see if the service is there
+
+== usage ==
+i adapted the dhcp script in /etc/dhcp/ to use this:
+                                "00001009")
+                                        exec qdbus --system de.lastlog.nmInterface /MainApplication executeConfiguration wpa_supplicant_generic_dhcp_ath0.N0
+                                        #exec /root/config/wpa_supplicant_generic_dhcp_ath0 &
+                                        #
+                                        ;;
+                                "0000100a")
+                                        exec qdbus --system de.lastlog.nmInterface /MainApplication executeConfiguration /root/config/internetlab-ath0
+                                        #exec /root/config/internetlab-ath0 &
+                                        #
+                                        ;;
+this way my graphical interface will reflect the status change in the logs (when it's running)
+
+on boot i do run also a qdbus call from here:
+  /etc/conf.d/local.start
+
+== how does executing a script look like? ==
+the server instance listens on the dbus::systembus and one can use qdbus to load a certain config. the config is then loaded and debug output
+is sent to the attached client via dbus as well.
+
+the client has a trayIcon which can be clicked with left mouse button - LMB to view the debug widget
+MMB will clear the debug widget's content
+
+have fun
